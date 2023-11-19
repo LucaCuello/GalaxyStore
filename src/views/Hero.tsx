@@ -1,5 +1,6 @@
 import { Button } from "@nextui-org/react";
 import { IoRocketOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   return (
@@ -17,6 +18,8 @@ export const Hero = () => {
         </p>
         <Button
           className="bg-violet-500 text-background shadow-lg shadow-violet-800/60 hover:shadow-violet-800/80"
+          as={Link}
+          to="/products"
           startContent={<IoRocketOutline />}
           fullWidth
         >
