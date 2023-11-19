@@ -11,22 +11,12 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import { IoMdPlanet } from "react-icons/io";
+import { NavLink, Link as RouterLink } from "react-router-dom";
 
 export const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+  const menuItems = ["Home", "About us", "Products", "Log in"];
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -35,40 +25,46 @@ export const NavBar = () => {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
-        <NavbarBrand>
-          <IoMdPlanet className="text-xl text-violet-300"/>
+        <NavbarBrand as={RouterLink} to={"/home"}>
+          <IoMdPlanet className="text-xl text-violet-300" />
           <p className="font-bold text-inherit ms-2">GALAXY STORE</p>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" as={NavLink} to={"/home"}>
             Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#" aria-current="page">
+          <Link
+            color="foreground"
+            href="#"
+            aria-current="page"
+            as={NavLink}
+            to={"/about"}
+          >
             About us
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="#" as={NavLink} to={"/products"}>
             Products
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#" className="text-violet-300">
+          <Link as={RouterLink} to="auth/login" className="text-violet-300">
             Login
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Button
-            as={Link}
+            as={RouterLink}
             className="text-violet-300 bg-violet-500/20"
-            href="#"
+            to="auth/register"
             variant="flat"
           >
             Sign Up
@@ -78,18 +74,7 @@ export const NavBar = () => {
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
+            <Link color="foreground" className="w-full" href="#" size="lg">
               {item}
             </Link>
           </NavbarMenuItem>
