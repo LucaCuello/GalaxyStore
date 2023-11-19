@@ -1,7 +1,14 @@
+import { NavBar } from "./components/Navbar";
+// import { StarryBackground } from "./components/StarryBackground";
+import { Hero } from "./views/Hero";
+
 function App() {
   return (
     <>
-      <h1>Hello!</h1>
+      <NavBar />
+      {/* <StarryBackground> */}
+      <Hero />
+      {/* </StarryBackground> */}
     </>
   );
 }
