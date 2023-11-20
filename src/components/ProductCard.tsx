@@ -1,24 +1,25 @@
 import {
-    Button,
-    Card,
-    CardBody,
-    CardFooter,
-    CardHeader,
-    Image,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Image,
 } from "@nextui-org/react";
 import { IoSparklesSharp } from "react-icons/io5";
+import { Product } from "../interfaces/interfaces";
 
-export const ProductCard = () => {
+export const ProductCard = ({ product }: { product: Product }) => {
   return (
     <Card className="py-4 max-w-max" isFooterBlurred>
       <CardHeader className="pb-0 pt-0 px-4 flex-col items-start">
         <h4 className="font-bold uppercase text-large text-xl text-violet-400">
-          The moon
+          {product.name}
         </h4>
         <p className="text-tiny uppercase font-bold text-violet-200">
-          Inner Solar System
+          {product.category}
         </p>
-        <small className="text-default-500">Inhabited Worlds</small>
+        <small className="text-default-500">{product.subcategory}</small>
       </CardHeader>
       <CardBody className="overflow-visible py-2">
         <Image
@@ -26,7 +27,7 @@ export const ProductCard = () => {
           className="object-cover"
           height={200}
           width={200}
-          src="https://i.ibb.co/rm42mFK/01.jpg"
+          src={product.imageURL}
         />
       </CardBody>
       <CardFooter className="pb-0 pt-0">
