@@ -1,14 +1,6 @@
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Image,
-  Skeleton,
-} from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { ProductCard } from "../components/ProductCard";
+import { ProductCardSkeleton } from "../components/ProductCardSkeleton";
 import { ProductWithId } from "../interfaces/interfaces";
 import { getProducts } from "../services/ProductServices";
 
@@ -48,9 +40,7 @@ export const Products = () => {
       <div className="flex flex-wrap gap-4">
         {isLoading
           ? Array.from({ length: 8 }).map((_, index) => (
-              <Skeleton key={index} className="rounded-xl">
-                <div style={{ height: 351, width: 224 }}></div>
-              </Skeleton>
+              <ProductCardSkeleton key={index} />
             ))
           : product.map((prod) => <ProductCard key={prod.id} product={prod} />)}
       </div>
