@@ -43,7 +43,7 @@ export default function ProductCardDetails({ product }: { product: Product }) {
               </p>
               <small className="text-default-500">{product.subcategory}</small>
             </div>
-            <p className="text-default-600 tracking-wide">
+            <p className="tracking-wide subpixel-antialiased text-default-500">
               {product.description}
             </p>
             <p className="flex items-center gap-2">

@@ -9,7 +9,7 @@ export const Hero = () => {
         <h1 className="text-3xl font-bold tracking-tight text-violet-400">
           Embark on an interstellar Journey!
         </h1>
-        <p className="font-light subpixel-antialiased">
+        <p className="subpixel-antialiased text-default-500 tracking-wide">
           Discover the wonders of the solar system with our exclusive collection
           of high-quality planetary posters. From the dynamic storms of Jupiter
           to the serene beauty of Saturn's rings, each piece is a window to the

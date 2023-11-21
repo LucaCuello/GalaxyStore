@@ -10,7 +10,7 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/react";
-import { IoRocketOutline, IoSparklesSharp } from "react-icons/io5";
+import { IoSparklesSharp } from "react-icons/io5";
 import { Product } from "../interfaces/interfaces";
 import ProductCardDetails from "./ProductCardDetails";
 
@@ -80,10 +80,10 @@ export const ProductCard = ({ product }: { product: Product }) => {
                   <Button
                     className="text-violet-300 bg-violet-500/20"
                     onPress={onClose}
-                    startContent={<IoRocketOutline />}
+                    startContent={<IoSparklesSharp />}
                     endContent={<IoSparklesSharp />}
                   >
-                    Buy!
+                    Add to cart
                   </Button>
                 </ModalFooter>
               </>
