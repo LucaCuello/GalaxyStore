@@ -20,7 +20,6 @@ export const Products = () => {
           };
         });
         setProduct(products);
-        console.log(products);
       } catch (err) {
         console.log(err);
       } finally {
@@ -33,10 +32,12 @@ export const Products = () => {
 
   return (
     <div className="container max-w-[1024px] px-4">
-      <h2 className="text-xl pt-4 font-bold font-normal">
-        Take a look at our posters.
+      <h2 className="pt-4 text-3xl font-bold tracking-tight text-violet-400">
+        Our products
       </h2>
-      <p className="pb-4">You'll like them!</p>
+      <p className="pb-4 subpixel-antialiased text-default-500 tracking-wide">
+        You'll like them!
+      </p>
       <div className="flex flex-wrap gap-4">
         {isLoading
           ? Array.from({ length: 8 }).map((_, index) => (
