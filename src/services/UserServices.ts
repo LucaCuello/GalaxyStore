@@ -1,7 +1,7 @@
 import firebase from "../config/firebase";
-import { FormValues } from "../interfaces/interfaces";
+import { LoginValues, RegisterValues } from "../interfaces/interfaces";
 
-export const createUser = async (formValues: FormValues) => {
+export const createUser = async (formValues: RegisterValues) => {
   const response = await firebase
     .auth()
     .createUserWithEmailAndPassword(formValues.email, formValues.password);
@@ -14,7 +14,7 @@ export const createUser = async (formValues: FormValues) => {
   }
 };
 
-export const login = async (formValues: FormValues) => {
+export const login = async (formValues: LoginValues) => {
   const response = await firebase
     .auth()
     .signInWithEmailAndPassword(formValues.email, formValues.password);
