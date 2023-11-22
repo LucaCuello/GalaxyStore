@@ -1,20 +1,33 @@
 import { motion } from "framer-motion";
 import { CiWarning } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { AlertProps } from "../interfaces/interfaces";
+import { getAlertColor } from "../utils/utils";
 
-export const Alert = () => {
+export const Alert = ({
+  severity,
+  message,
+  recomendation,
+  route,
+}: AlertProps) => {
   return (
     <motion.div
       initial={{ scaleX: 0 }}
       animate={{ scaleX: 1 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="flex gap-2 items-center p-4 bg-warning text-yellow-900 rounded"
+      className={getAlertColor(severity)}
     >
-      <CiWarning className="text-xl text-yellow-900" />
+      <CiWarning
+        className={`${
+          severity === "error"
+            ? "text-xl text-red-300"
+            : "text-xl text-yellow-900"
+        }`}
+      />
       <p className="font-semibold">
-        This email already exists. Use a different one or try to{" "}
+        {message}{" "}
         <span className="underline cursor-pointer">
-          <Link to="/auth/login">log in instead</Link>
+          <Link to={route}>{recomendation}</Link>
         </span>
       </p>
     </motion.div>
