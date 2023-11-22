@@ -1,7 +1,7 @@
 import { Button, Input } from "@nextui-org/react";
 import { useFormik } from "formik";
+import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { CiWarning } from "react-icons/ci";
 import {
   IoEyeOffOutline,
   IoEyeOutline,
@@ -9,13 +9,16 @@ import {
 } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { Toaster, toast } from "sonner";
+import { Alert } from "../components/Alert";
 import { FormValues } from "../interfaces/interfaces";
 import { registerSchema as validationSchema } from "../schemas/schemas";
 import { createUser } from "../services/UserServices";
+import { isErrorWithCode } from "../utils/utils";
 
 export const Register = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const formik = useFormik({
@@ -32,12 +35,18 @@ export const Register = () => {
         const response = await createUser(values);
         toast.success("Account created successfully");
         resetForm();
+        setIsAlertVisible(false);
+        // TODO: Guardar UID en LS
         console.log(response);
       } catch (error) {
-        if (error.code === "auth/email-already-in-use") {
-          // FIXME: Solucionar error de typescript
-          // TODO: Mostrar componente alert
-          console.log("Email already exists");
+        if (isErrorWithCode(error)) {
+          {
+            if (error.code === "auth/email-already-in-use") {
+              setIsAlertVisible(true);
+            }
+          }
+        } else {
+          toast.error("Something went wrong, try again later");
         }
       } finally {
         setIsLoading(false);
@@ -123,16 +132,7 @@ export const Register = () => {
           >
             Register and explore
           </Button>
-          {/* TODO: Componetizar */}
-          <div className="flex gap-2 items-center p-4 bg-warning text-yellow-900 rounded">
-            <CiWarning className="text-xl text-yellow-900" />
-            <p className="font-semibold">
-              This email already exists. Use a different one or try to{" "}
-              <span className="underline cursor-pointer">
-                <Link to="/auth/login">log in instead</Link>
-              </span>
-            </p>
-          </div>
+          <AnimatePresence>{isAlertVisible && <Alert />}</AnimatePresence>
           <span className="text-sm text-violet-200/80">
             Already have an account?{" "}
             <span className="text-violet-400 cursor-pointer">
