@@ -24,5 +24,5 @@ export const login = async (formValues: LoginValues) => {
 };
 
 export const saveUIDToLocalStorage = (uid: string) => {
-  localStorage.setItem("uid", uid);
+  localStorage.setItem("token", uid);
 };
