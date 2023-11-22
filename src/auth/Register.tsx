@@ -1,4 +1,11 @@
-import { Button, Input } from "@nextui-org/react";
+import {
+  Button,
+  Input,
+  Modal,
+  ModalContent,
+  ModalFooter,
+  useDisclosure,
+} from "@nextui-org/react";
 import { useFormik } from "formik";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -7,9 +14,10 @@ import {
   IoEyeOutline,
   IoSparklesSharp,
 } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { Alert } from "../components/Alert";
+import { RegisterSuccessModal } from "../components/RegisterSuccessModal";
 import { FormValues } from "../interfaces/interfaces";
 import { registerSchema as validationSchema } from "../schemas/schemas";
 import { createUser } from "../services/UserServices";
@@ -19,7 +27,13 @@ export const Register = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
   const toggleVisibility = () => setIsVisible(!isVisible);
+
+  const handleOpen = () => {
+    onOpen();
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -36,8 +50,11 @@ export const Register = () => {
         toast.success("Account created successfully");
         resetForm();
         setIsAlertVisible(false);
-        // TODO: Guardar UID en LS
-        console.log(response);
+        handleOpen();
+        setTimeout(() => {
+          navigate("/auth/login");
+        }, 3000);
+        console.log("User ID", response);
       } catch (error) {
         if (isErrorWithCode(error)) {
           {
@@ -56,6 +73,38 @@ export const Register = () => {
 
   return (
     <>
+      <Modal
+        size={"md"}
+        isOpen={isOpen}
+        onClose={onClose}
+        backdrop="blur"
+        scrollBehavior="outside"
+        className="dark text-foreground bg-background"
+        isDismissable={false}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <RegisterSuccessModal />
+              <ModalFooter>
+                <Button
+                  variant="light"
+                  className="bg-default-100 text-default-500"
+                  onPress={onClose}
+                >
+                  Close
+                </Button>
+                <Button
+                  className="text-violet-300 bg-violet-500/20"
+                  onPress={onClose}
+                >
+                  Got it!
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
       <Toaster richColors />
       <div className="container max-w-[1024px] px-4">
         <h2 className="text-3xl font-bold tracking-tight text-violet-400">

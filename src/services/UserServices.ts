@@ -13,3 +13,16 @@ export const createUser = async (formValues: FormValues) => {
     return response.user.uid;
   }
 };
+
+export const login = async (formValues: FormValues) => {
+  const response = await firebase
+    .auth()
+    .signInWithEmailAndPassword(formValues.email, formValues.password);
+  if (response.user) {
+    return response.user.uid;
+  }
+};
+
+export const saveUIDToLocalStorage = (uid: string) => {
+  localStorage.setItem("uid", uid);
+};
