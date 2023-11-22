@@ -8,5 +8,12 @@ export interface Product {
 }
 
 export interface ProductWithId extends Product {
-    id: string;
-  }
+  id: string;
+}
+
+export interface FormValues {
+  fullName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
