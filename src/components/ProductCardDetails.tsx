@@ -1,9 +1,9 @@
 import {
-    BreadcrumbItem,
-    Breadcrumbs,
-    Image,
-    ModalBody,
-    ModalHeader,
+  BreadcrumbItem,
+  Breadcrumbs,
+  Image,
+  ModalBody,
+  ModalHeader,
 } from "@nextui-org/react";
 import { CiShoppingTag } from "react-icons/ci";
 import { Product } from "../interfaces/interfaces";
@@ -48,7 +48,7 @@ export default function ProductCardDetails({ product }: { product: Product }) {
             </p>
             <p className="flex items-center gap-2">
               <CiShoppingTag />
-              <p className="text-violet-400 font-bold">{`$${product.price},00 USD`}</p>
+              <span className="text-violet-400 font-bold">{`$${product.price},00 USD`}</span>
             </p>
           </div>
         </div>

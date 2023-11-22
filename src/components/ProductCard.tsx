@@ -72,7 +72,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
                 <ModalFooter>
                   <Button
                     variant="light"
-                    className="bg-default-100"
+                    className="bg-default-100 text-default-500"
                     onPress={onClose}
                   >
                     Close
