@@ -10,61 +10,15 @@ import {
   NavbarMenuToggle,
   User,
 } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoMdPlanet } from "react-icons/io";
 import { NavLink, Link as RouterLink } from "react-router-dom";
 import Avatar from "../assets/icons/avatar.jpg";
 import { useAuth } from "../hooks/useAuth";
 
-import firebase from "../config/firebase";
-
-interface User {
-  userId: string;
-  nombre: string;
-  email: string;
-}
-
 export const NavBar = () => {
-  useEffect(() => {
-    const getAllUsers = async (): Promise<User[]> => {
-      try {
-        const usersCollection = await firebase
-          .firestore()
-          .collection("users")
-          .get();
-        const users: User[] = [];
-        usersCollection.forEach((doc) => {
-          users.push(doc.data() as User);
-        });
-        return users;
-      } catch (error) {
-        console.error("Error al obtener los usuarios: ", error);
-        return []; // Devuelve un arreglo vacío en caso de error
-      }
-    };
-
-    const getUserByToken = async (): Promise<User | undefined> => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          console.log("No hay token disponible");
-          return undefined;
-        }
-
-        const allUsers = await getAllUsers();
-        const filteredUser = allUsers.find((user) => user.userId === token);
-        console.log(filteredUser);
-        return filteredUser;
-      } catch (error) {
-        console.error("Error al filtrar el usuario: ", error);
-        return undefined;
-      }
-    };
-    getUserByToken();
-  }, []);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, userData } = useAuth();
   const menuItems = ["Home", "About us", "Products", "Log in"];
 
   return (
@@ -104,10 +58,10 @@ export const NavBar = () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        {isAuthenticated ? (
+        {isAuthenticated && userData ? (
           <User
-            name="Luca Cuello"
-            description="lucagcuello@gmail.com"
+            name={userData.fullName}
+            description={userData.email}
             avatarProps={{
               src: Avatar,
             }}

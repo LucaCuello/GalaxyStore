@@ -11,6 +11,10 @@ export const createUser = async (formValues: RegisterValues) => {
       email: formValues.email,
       userId: response.user.uid,
     });
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({ fullName: formValues.fullName, email: formValues.email })
+    );
     return response.user.uid;
   }
 };
@@ -26,18 +30,4 @@ export const login = async (formValues: LoginValues) => {
 
 export const saveUIDToLocalStorage = (uid: string) => {
   localStorage.setItem("token", uid);
-};
-
-export const getUserData = async () => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    const userDoc = await firebase
-      .firestore()
-      .collection("users")
-      .doc(token)
-      .get();
-    if (userDoc.exists) {
-      return userDoc.data();
-    }
-  }
 };

@@ -1,24 +1,30 @@
-import React, { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import firebase from "../config/firebase";
-import { LoginValues } from "../interfaces/interfaces";
+import {
+  AuthProviderProps,
+  LoginValues,
+  UserData,
+} from "../interfaces/interfaces";
 import * as userService from "../services/UserServices";
-
-type AuthProviderProps = {
-  children: React.ReactNode;
-};
 
 export const AuthContext = createContext<{
   isAuthenticated: boolean;
+  userData: UserData | null;
   login: (formValues: LoginValues) => Promise<void>;
   logout: () => void;
 } | null>(null);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
+    const storedUserData = localStorage.getItem("userData");
+    if (token && storedUserData) {
+      setIsAuthenticated(true);
+      setUserData(JSON.parse(storedUserData));
+    }
   }, []);
 
   const login = async (formValues: LoginValues) => {
@@ -37,6 +43,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const value = {
     isAuthenticated,
+    userData,
     login,
     logout,
   };

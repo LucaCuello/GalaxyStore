@@ -29,3 +29,12 @@ export interface AlertProps {
   recomendation: string;
   route: string;
 }
+
+export type AuthProviderProps = {
+  children: React.ReactNode;
+};
+
+export type UserData = {
+  fullName: string;
+  email: string;
+};
