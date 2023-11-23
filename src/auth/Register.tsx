@@ -98,7 +98,7 @@ export const Register = () => {
                   className="text-violet-300 bg-violet-500/20"
                   onPress={onClose}
                 >
-                  Got it!
+                  <Link to="/auth/login">Log in</Link>
                 </Button>
               </ModalFooter>
             </>
