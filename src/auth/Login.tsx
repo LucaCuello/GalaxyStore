@@ -6,14 +6,15 @@ import { IoSparklesSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { Alert } from "../components/Alert";
+import { useAuth } from "../hooks/useAuth";
 import { LoginValues } from "../interfaces/interfaces";
 import { loginSchema as validationSchema } from "../schemas/schemas";
-import { login, saveUIDToLocalStorage } from "../services/UserServices";
 import { isErrorWithCode } from "../utils/utils";
 
 export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const { login } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -25,7 +26,6 @@ export const Login = () => {
       setIsLoading(true);
       try {
         const response = await login(values);
-        if (response) saveUIDToLocalStorage(response);
         setIsAlertVisible(false);
         toast.success("Welcome back!");
         resetForm();
