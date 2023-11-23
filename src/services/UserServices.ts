@@ -23,7 +23,24 @@ export const login = async (formValues: LoginValues) => {
   const response = await firebase
     .auth()
     .signInWithEmailAndPassword(formValues.email, formValues.password);
+
   if (response.user) {
+    const userDoc = await firebase
+      .firestore()
+      .collection("users")
+      .where("userId", "==", response.user.uid)
+      .get();
+
+    if (!userDoc.empty) {
+      const userData = userDoc.docs[0].data();
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({ fullName: userData.fullName, email: userData.email })
+      );
+    }
+
+    saveUIDToLocalStorage(response.user.uid);
+
     return response.user.uid;
   }
 };

@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { IoSparklesSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { Alert } from "../components/Alert";
 import { useAuth } from "../hooks/useAuth";
@@ -15,6 +15,7 @@ export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -29,6 +30,9 @@ export const Login = () => {
         setIsAlertVisible(false);
         toast.success("Welcome back!");
         resetForm();
+        setTimeout(() => {
+          navigate("/products");
+        }, 1500);
         console.log(response);
       } catch (err) {
         console.log(err);

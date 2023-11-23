@@ -30,7 +30,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = async (formValues: LoginValues) => {
     const uid = await userService.login(formValues);
     if (uid) {
-      userService.saveUIDToLocalStorage(uid);
+      const storedUserData = localStorage.getItem("userData");
+      if (storedUserData) {
+        setUserData(JSON.parse(storedUserData));
+      }
       setIsAuthenticated(true);
     }
   };
