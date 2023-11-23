@@ -22,7 +22,7 @@ export const NavBar = () => {
   const menuItems = ["Home", "About us", "Products", "Log in"];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar onMenuOpenChange={setIsMenuOpen} id="test">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -57,15 +57,17 @@ export const NavBar = () => {
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify="end">
+      <NavbarContent justify="end" className="hidden sm:flex">
         {isAuthenticated && userData ? (
-          <User
-            name={userData.fullName}
-            description={userData.email}
-            avatarProps={{
-              src: Avatar,
-            }}
-          />
+          <NavbarItem>
+            <User
+              name={userData.fullName}
+              description={userData.email}
+              avatarProps={{
+                src: Avatar,
+              }}
+            />
+          </NavbarItem>
         ) : (
           <>
             <NavbarItem className="hidden lg:flex">

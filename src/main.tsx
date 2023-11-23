@@ -7,6 +7,7 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <NextUIProvider>
+      {/* TODO: Arreglar paddings en navbar causado por el px-4 */}
       <main className="dark text-foreground bg-background min-h-screen flex flex-col items-center px-4">
         <App />
       </main>

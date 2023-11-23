@@ -5,6 +5,7 @@ export interface Product {
   category: string;
   subcategory: string;
   imageURL: string;
+  imageURLsmall: string
 }
 
 export interface ProductWithId extends Product {

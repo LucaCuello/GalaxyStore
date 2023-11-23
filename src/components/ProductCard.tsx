@@ -39,7 +39,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
             className="object-cover"
             height={200}
             width={200}
-            src={product.imageURL}
+            src={product.imageURLsmall}
             isZoomed
           />
         </CardBody>
