@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function Countdown() {
-  const [count, setCount] = useState(3);
+  const [count, setCount] = useState(5);
   useEffect(() => {
     if (count > 0) {
       const timerId = setInterval(() => {

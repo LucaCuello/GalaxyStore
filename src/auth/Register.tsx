@@ -18,7 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { Alert } from "../components/Alert";
 import { RegisterSuccessModal } from "../components/RegisterSuccessModal";
-import { FormValues } from "../interfaces/interfaces";
+import { RegisterValues } from "../interfaces/interfaces";
 import { registerSchema as validationSchema } from "../schemas/schemas";
 import { createUser } from "../services/UserServices";
 import { isErrorWithCode } from "../utils/utils";
@@ -43,7 +43,7 @@ export const Register = () => {
       confirmPassword: "",
     },
     validationSchema,
-    onSubmit: async (values: FormValues, { resetForm }) => {
+    onSubmit: async (values: RegisterValues, { resetForm }) => {
       setIsLoading(true);
       try {
         const response = await createUser(values);
@@ -53,7 +53,7 @@ export const Register = () => {
         handleOpen();
         setTimeout(() => {
           navigate("/auth/login");
-        }, 3000);
+        }, 5000);
         console.log("User ID", response);
       } catch (error) {
         if (isErrorWithCode(error)) {
@@ -181,7 +181,16 @@ export const Register = () => {
           >
             Register and explore
           </Button>
-          <AnimatePresence>{isAlertVisible && <Alert />}</AnimatePresence>
+          <AnimatePresence>
+            {isAlertVisible && (
+              <Alert
+                message="This email already exists. Use a different one or"
+                recomendation="log in instead"
+                severity="warning"
+                route="/auth/login"
+              />
+            )}
+          </AnimatePresence>
           <span className="text-sm text-violet-200/80">
             Already have an account?{" "}
             <span className="text-violet-400 cursor-pointer">
