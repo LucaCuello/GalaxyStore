@@ -15,40 +15,32 @@ import { IoMdPlanet } from "react-icons/io";
 import { NavLink, Link as RouterLink } from "react-router-dom";
 import Avatar from "../assets/icons/avatar.jpg";
 import { useAuth } from "../hooks/useAuth";
+import { menuItems } from "../utils/utils";
 
 export const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, userData } = useAuth();
-  const menuItems = ["Home", "About us", "Products", "Log in"];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} id="test">
+    <Navbar
+      onMenuOpenChange={setIsMenuOpen}
+      isBlurred={false}
+      classNames={{ base: "bg-transparent" }}
+    >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
         <NavbarBrand as={RouterLink} to={"/home"}>
-          <IoMdPlanet className="text-xl text-violet-300" />
+          <IoMdPlanet className="text-xl text-violet-400" />
           <p className="font-bold text-inherit ms-2">GALAXY STORE</p>
         </NavbarBrand>
       </NavbarContent>
-
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link color="foreground" as={NavLink} to={"/home"}>
             Home
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            color="foreground"
-            href="#"
-            aria-current="page"
-            as={NavLink}
-            to={"/about"}
-          >
-            About us
           </Link>
         </NavbarItem>
         <NavbarItem>
@@ -88,12 +80,12 @@ export const NavBar = () => {
           </>
         )}
       </NavbarContent>
-      <NavbarMenu>
+      <NavbarMenu className="bg-[#07041bff]">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link color="foreground" className="w-full" href="#" size="lg">
-              {item}
-            </Link>
+            <RouterLink className="w-full text-default-400" to={`${item.href}`}>
+              {item.name}
+            </RouterLink>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>

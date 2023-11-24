@@ -32,7 +32,7 @@ export const Products = () => {
 
   return (
     <div className="container max-w-[1024px] px-4">
-      <h2 className="pt-4 text-3xl font-bold tracking-tight text-violet-400">
+      <h2 className="pt-4 text-3xl font-bold tracking-tight text-violet-400 font-serif">
         Our products
       </h2>
       <p className="pb-4 subpixel-antialiased text-default-500 tracking-wide">

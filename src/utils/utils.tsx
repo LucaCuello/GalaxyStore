@@ -10,3 +10,22 @@ export const getAlertColor = (severity: AlertProps["severity"]) => {
   if (severity === "warning")
     return "flex gap-2 items-center p-4 rounded bg-warning text-yellow-900";
 };
+
+export const menuItems = [
+  {
+    name: "Home",
+    href: "/home",
+  },
+  {
+    name: "Products",
+    href: "/products",
+  },
+  {
+    name: "Log in",
+    href: "/auth/login",
+  },
+  {
+    name: "Register",
+    href: "/auth/register",
+  },
+];

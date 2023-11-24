@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 export const Hero = () => {
   return (
-    <>
-      <div className="flex flex-col items-center justify-center max-w-xl text-center gap-2 pt-4">
-        <h1 className="text-3xl font-bold tracking-tight text-violet-400">
+    <div className="container max-w-[1024px] px-4 flex justify-center">
+      <div className="flex flex-col items-center justify-center max-w-xl text-center gap-4 pt-6 text-start md:text-center">
+        <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-violet-400 font-serif">
           Embark on an interstellar Journey!
         </h1>
         <p className="subpixel-antialiased text-default-500 tracking-wide">
@@ -17,7 +17,7 @@ export const Hero = () => {
           designed to inspire and educate.
         </p>
         <Button
-          className="bg-violet-500 text-background shadow-lg shadow-violet-800/60 hover:shadow-violet-800/80"
+          className="bg-violet-500 text-background shadow-lg shadow-violet-800/40 hover:shadow-violet-800/80"
           as={Link}
           to="/products"
           startContent={<IoRocketOutline />}
@@ -26,6 +26,6 @@ export const Hero = () => {
           Explore the cosmos
         </Button>
       </div>
-    </>
+    </div>
   );
 };
