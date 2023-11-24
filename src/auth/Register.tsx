@@ -107,7 +107,7 @@ export const Register = () => {
       </Modal>
       <Toaster richColors />
       <div className="container max-w-[1024px] px-4">
-        <h2 className="text-3xl font-bold tracking-tight text-violet-400">
+        <h2 className="text-3xl font-bold tracking-tight text-violet-400 font-serif">
           Join us
         </h2>
         <p className="subpixel-antialiased text-default-500 tracking-wide">

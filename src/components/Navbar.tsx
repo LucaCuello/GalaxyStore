@@ -22,14 +22,18 @@ export const NavBar = () => {
   const menuItems = ["Home", "About us", "Products", "Log in"];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} id="test">
+    <Navbar
+      onMenuOpenChange={setIsMenuOpen}
+      isBlurred={false}
+      classNames={{ base: "bg-transparent" }}
+    >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
         <NavbarBrand as={RouterLink} to={"/home"}>
-          <IoMdPlanet className="text-xl text-violet-300" />
+          <IoMdPlanet className="text-xl text-violet-400" />
           <p className="font-bold text-inherit ms-2">GALAXY STORE</p>
         </NavbarBrand>
       </NavbarContent>
@@ -38,17 +42,6 @@ export const NavBar = () => {
         <NavbarItem>
           <Link color="foreground" as={NavLink} to={"/home"}>
             Home
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            color="foreground"
-            href="#"
-            aria-current="page"
-            as={NavLink}
-            to={"/about"}
-          >
-            About us
           </Link>
         </NavbarItem>
         <NavbarItem>

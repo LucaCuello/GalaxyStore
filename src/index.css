@@ -6,3 +6,9 @@
   color: #a78bfa;
   font-weight: bold;
 }
+
+main {
+  background-image: url("./assets/backgrounds/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

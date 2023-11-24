@@ -4,13 +4,10 @@ import {
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
-import { NavBar } from "./components/Navbar";
-// TODO: Implementar fondo estrellado
-// import { StarryBackground } from "./components/StarryBackground";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
+import { NavBar } from "./components/Navbar";
 import { AuthProvider } from "./context/AuthContext";
-import { AboutUs } from "./views/AboutUs";
 import { Hero } from "./views/Hero";
 import { Products } from "./views/Products";
 
@@ -20,14 +17,15 @@ function App() {
       <AuthProvider>
         <Router>
           <NavBar />
-          <Routes>
-            <Route path="/home" element={<Hero />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/auth/login" element={<Login />} />
-            <Route path="/auth/register" element={<Register />} />
-            <Route path="*" element={<Navigate to="/home" />} />
-          </Routes>
+          <div className="px-3 max-w-[1024px] w-full">
+            <Routes>
+              <Route path="/home" element={<Hero />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/auth/login" element={<Login />} />
+              <Route path="/auth/register" element={<Register />} />
+              <Route path="*" element={<Navigate to="/home" />} />
+            </Routes>
+          </div>
         </Router>
       </AuthProvider>
     </>
