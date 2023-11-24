@@ -67,7 +67,7 @@ export const Login = () => {
         >
           <Input
             type="email"
-            label="Enter the email address associated with your account"
+            label="Enter your email address"
             placeholder="Email address"
             errorMessage={formik.touched.email && formik.errors.email}
             isInvalid={formik.touched.email && Boolean(formik.errors.email)}
